@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Train Schedule</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
+
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="assets/javascript/train.js"></script>
+    <div class="jumbotron">
+        <h1 class="display-4 text-center">Train Schedule</h1>
+        <p class="lead text-center"></p>
+
+    </div>
+    <!-- bonus goal: add current time header between schedule and jumbotron-->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Train Name</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Frequency (min)</th>
+                <th scope="col">Next Arrival</th>
+                <th scope="col">Minutes Aways</th>                
+                <!-- bonus goal: update minutes away every minute-->
+                <!-- bonus goal: add remove button-->
+            </tr>
+        </thead>
+
+        <form class="form-group ">
+
+            <div>
+                Add Train<br>
+                <label for="train-name">Employee name</label>
+                <input class="form-control" id="train-name" aria-describedby="trainName">
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <input class="form-control" id="destination">
+            </div>
+            <div class="form-group">
+                <label for="first-train-time">First Train Time (HH:mm - Miliatary time)</label>
+                <input data-format="hh:mm" type="time" class="form-control" id="first-train-time">
+            </div>
+            <div class="form-group">
+                <label for="frequency">Frequency (min)</label>
+                <input type="number" class="form-control" id="frequency">
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="add-user">Submit</button>
+        </form>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="assets/javascript/train.js"></script>
 </body>
+
 </html>
