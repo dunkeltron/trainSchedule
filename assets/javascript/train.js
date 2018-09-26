@@ -46,14 +46,13 @@ database.ref().on("value", function (snapshot) {
     $("tbody").empty();
     console.log("value");
     var elements = Object.values(snapshot.val());
-
+    var counter = 0;
     elements.forEach(element => {
-        
+
         //calculate months worked using moment
         var firstTimeConverted = moment(element.firstTrain, "HH:mm").subtract(1, "years");
 
-        // Current Time
-        var currentTime = moment();
+
 
         // Difference between the times
         var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
@@ -72,42 +71,44 @@ database.ref().on("value", function (snapshot) {
         var row = $("<tr>");
         var scope = $("<td>");
         scope.attr("scope", "row");
+        scope.attr("class", "name");
         scope.text(element.name);
         var destinationDiv = $("<td>");
         var frequencyDiv = $("<td>");
         destinationDiv.text(element.destination);
+        destinationDiv.attr("class", "destination");
         frequencyDiv.text(element.frequency);
+        frequencyDiv.attr("class", "frequency");
         //append to row
         row.append(scope, destinationDiv, frequencyDiv);
 
         var nextArrival = $("<td>");
         var minutesAway = $("<td>");
+        nextArrival.attr("class", "next-train");
+        minutesAway.attr("class", "minutes-away");
         nextArrival.text(moment(nextTrain).format("hh:mm"));
-        minutesAway.text(tMinutesTillTrain);   
+        minutesAway.text(tMinutesTillTrain);
         row.append(nextArrival, minutesAway);
         $("tbody").append(row);
+        counter++;
     });
-
 }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
- });
+});
 
 
 
 
 // Firebase watcher .on("child_added"
- database.ref().on("child_added", function (snapshot) {
+database.ref().on("child_added", function (snapshot) {
     $("tbody").empty();
     console.log("value");
     var elements = Object.values(snapshot.val());
-
+    var counter = 0;
     elements.forEach(element => {
-        
+
         //calculate months worked using moment
         var firstTimeConverted = moment(element.firstTrain, "HH:mm").subtract(1, "years");
-
-        // Current Time
-        var currentTime = moment();
 
         // Difference between the times
         var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
@@ -126,22 +127,50 @@ database.ref().on("value", function (snapshot) {
         var row = $("<tr>");
         var scope = $("<td>");
         scope.attr("scope", "row");
+        scope.addClass("name");
         scope.text(element.name);
         var destinationDiv = $("<td>");
         var frequencyDiv = $("<td>");
         destinationDiv.text(element.destination);
+        destinationDiv.addClass("destination");
         frequencyDiv.text(element.frequency);
+        frequencyDiv.addClass("frequency");
         //append to row
         row.append(scope, destinationDiv, frequencyDiv);
 
         var nextArrival = $("<td>");
         var minutesAway = $("<td>");
+        nextArrival.addClass("next-train");
+        minutesAway.addClass("minutes-away");
         nextArrival.text(moment(nextTrain).format("hh:mm"));
-        minutesAway.text(tMinutesTillTrain);   
+        minutesAway.text(tMinutesTillTrain);
         row.append(nextArrival, minutesAway);
         $("tbody").append(row);
+        counter++;
     });
-     // Handle the errors
- }, function (errorObject) {
-     console.log("Errors handled: " + errorObject.code);
- });
+    // Handle the errors
+}, function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});
+function updateTable() {
+    var minutesAwayCol = document.getElementsByClassName("minutes-away");
+    var frequencies = document.getElementsByClassName("frequency");
+    var nextTrains = document.getElementsByClassName("next-train");
+    if (minutesAwayCol.length > 0) {
+
+        for (i = 0; i < minutesAwayCol.length; i++) {
+            console.log(minutesAwayCol[i].textContent);
+            if (minutesAwayCol[i].textContent > 0) {
+
+                $(minutesAwayCol[i]).text(minutesAwayCol[i].textContent - 1);
+            }
+            else {
+                $(minutesAwayCol[i]).text(frequencies[i].textContent);
+                $(nextTrains[i]).text(moment(nextTrains[i].textContent,'HH:mm').add(frequencies[i].textContent,"m").format("HH:mm"))
+            }
+        };
+    }
+    console.log(moment(nextTrains[0].textContent,'HH:mm').format("HH:mm"));
+}
+
+ setInterval(updateTable,60000);
