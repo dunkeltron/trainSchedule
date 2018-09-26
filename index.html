@@ -29,12 +29,15 @@
                 <!-- bonus goal: add remove button-->
             </tr>
         </thead>
+        <tbody>
+            
+        </tbody>
 
         <form class="form-group ">
 
             <div>
                 Add Train<br>
-                <label for="train-name">Employee name</label>
+                <label for="train-name">Train name</label>
                 <input class="form-control" id="train-name" aria-describedby="trainName">
             </div>
             <div class="form-group">
@@ -50,9 +53,10 @@
                 <input type="number" class="form-control" id="frequency">
             </div>
 
-            <button type="submit" class="btn btn-primary" id="add-user">Submit</button>
+            <button type="button" class="btn btn-primary" id="add-train">Submit</button>
         </form>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="assets/javascript/train.js"></script>
 </body>
