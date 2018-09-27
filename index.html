@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Train Schedule</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 
@@ -17,23 +16,31 @@
 
     </div>
     <!-- bonus goal: add current time header between schedule and jumbotron-->
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Train Name</th>
-                <th scope="col">Destination</th>
-                <th scope="col">Frequency (min)</th>
-                <th scope="col">Next Arrival</th>
-                <th scope="col">Minutes Aways</th>                
-                <!-- bonus goal: update minutes away every minute-->
-                <!-- bonus goal: add remove button-->
-            </tr>
-        </thead>
-        <tbody>
-            
-        </tbody>
+    
+    <div class="container border col-xs-10">
+        <div class="">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Train Name</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Frequency (min)</th>
+                    <th scope="col">Next Arrival</th>
+                    <th scope="col">Minutes Aways</th>
+                    <!-- bonus goal: add remove button-->
+                </tr>
+            </thead>
+            <tbody>
 
-        <form class="form-group ">
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <br><br>
+
+    <div class="container border col-xs-10">
+        <div class="">
+        <form class="form-group  ">
 
             <div>
                 Add Train<br>
@@ -55,10 +62,12 @@
 
             <button type="button" class="btn btn-primary" id="add-train">Submit</button>
         </form>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="assets/javascript/train.js"></script>
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="assets/javascript/train.js"></script>
 </body>
 
 </html>

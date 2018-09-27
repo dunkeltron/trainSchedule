@@ -1,5 +1,3 @@
-
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDb5qVgATv4MjXm6_y29ivqoaxiFzliDKA",
@@ -25,21 +23,27 @@ $("#add-train").on("click", function (event) {
     destination = $("#destination").val().trim();
     firstTrain = $("#first-train-time").val().trim();
     frequency = $("#frequency").val().trim();
-
-    console.log(name);
-    console.log(firstTrain);
-    console.log(destination);
-    console.log(frequency);
-    database.ref().push({
-        name: name,
-        destination: destination,
-        firstTrain: firstTrain,
-        frequency: frequency
-    });
-    $("#train-name").val("");
-    $("#destination").val("");
-    $("#first-train-time").val("");
-    $("#frequency").val("");
+    
+    //if name destination firstTrain or frequency is left blank don't accept the input.
+    //if frequency is less than zero also don't accept the input
+    if (name == "" || destination == "" || firstTrain == "" || frequency == "" || frequency < 0) {
+        
+    } else {
+        console.log(name);
+        console.log(firstTrain);
+        console.log(destination);
+        console.log(frequency);
+        database.ref().push({
+            name: name,
+            destination: destination,
+            firstTrain: firstTrain,
+            frequency: frequency
+        });
+        $("#train-name").val("");
+        $("#destination").val("");
+        $("#first-train-time").val("");
+        $("#frequency").val("");
+    }
 });
 
 database.ref().on("value", function (snapshot) {
@@ -152,6 +156,7 @@ database.ref().on("child_added", function (snapshot) {
 }, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
 });
+
 function updateTable() {
     var minutesAwayCol = document.getElementsByClassName("minutes-away");
     var frequencies = document.getElementsByClassName("frequency");
@@ -163,14 +168,13 @@ function updateTable() {
             if (minutesAwayCol[i].textContent > 0) {
 
                 $(minutesAwayCol[i]).text(minutesAwayCol[i].textContent - 1);
-            }
-            else {
+            } else {
                 $(minutesAwayCol[i]).text(frequencies[i].textContent);
-                $(nextTrains[i]).text(moment(nextTrains[i].textContent,'HH:mm').add(frequencies[i].textContent,"m").format("HH:mm"))
+                $(nextTrains[i]).text(moment(nextTrains[i].textContent, 'HH:mm').add(frequencies[i].textContent, "m").format("HH:mm"))
             }
         };
     }
-    console.log(moment(nextTrains[0].textContent,'HH:mm').format("HH:mm"));
+    console.log(moment(nextTrains[0].textContent, 'HH:mm').format("HH:mm"));
 }
 
- setInterval(updateTable,60000);
+setInterval(updateTable, 60000);
